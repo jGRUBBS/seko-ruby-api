@@ -5,10 +5,13 @@ module Seko
 
     DPD = "http://www.dpd.co.uk/apps/tracking/?reference=:tracking_number&postcode=#results"
     UPS = "http://wwwapps.ups.com/WebTracking/track?trackNums=:tracking_number&track.x=Track"
+    # Spring Global Mail
+    SGM = "http://www.springglobalmail.com/en/node/170?t=:tracking_number"
 
     TRACKING_NUMBERS = {
       'UPS' => /\b(1Z ?[0-9A-Z]{3} ?[0-9A-Z]{3} ?[0-9A-Z]{2} ?[0-9A-Z]{4} ?[0-9A-Z]{3} ?[0-9A-Z]|[\dT]\d\d\d ?\d\d\d\d ?\d\d\d)\b/i,
-      'DPD' => /\b([0-9]{14} ?[A-Z]{1})/i
+      'DPD' => /\b([0-9]{14} ?[A-Z]{1})/i,
+      'SGM' => /\b([A-Z]{2} ?[0-9]{9} ?[A-Z]{2})/i
     }
 
     def get_carrier

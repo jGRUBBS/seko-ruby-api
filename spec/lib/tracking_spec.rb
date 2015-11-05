@@ -3,10 +3,13 @@ describe Seko::Tracking do
 
   let(:dpd_url)      { 'http://www.dpd.co.uk/apps/tracking/?reference=:tracking_number&postcode=#results' }
   let(:ups_url)      { 'http://wwwapps.ups.com/WebTracking/track?trackNums=:tracking_number&track.x=Track' }
+  let(:sgm_url)      { 'http://www.springglobalmail.com/en/node/170?t=:tracking_number' }
   let(:ups_number)   { '1Z87932WD945835927' }
   let(:dpd_number)   { '15503259038100Z' }
+  let(:sgm_number)   { 'RS335869585NL' }
   let(:ups_tracking) { Seko::Tracking.new('', ups_number) }
   let(:dpd_tracking) { Seko::Tracking.new('', dpd_number) }
+  let(:sgm_tracking) { Seko::Tracking.new('', sgm_number) }
 
   describe '#get_carrier' do
     it 'returns the carrier based on a regular expression match' do
@@ -26,8 +29,10 @@ describe Seko::Tracking do
     it 'returns the final tracking url' do
       ups_tracking_number = ups_url.gsub(':tracking_number', ups_number)
       dpd_tracking_number = dpd_url.gsub(':tracking_number', dpd_number)
+      sgm_tracking_number = sgm_url.gsub(':tracking_number', sgm_number)
       expect(ups_tracking.url).to eq(ups_tracking_number)
       expect(dpd_tracking.url).to eq(dpd_tracking_number)
+      expect(sgm_tracking.url).to eq(sgm_tracking_number)
     end
   end
 
